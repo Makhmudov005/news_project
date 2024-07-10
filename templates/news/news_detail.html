@@ -1,0 +1,26 @@
+{% extends 'news/base.html' %}
+{% load static %}
+
+{% block title %} {{ news.title }} {% endblock title %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="display-4">{{ news.title }}</h1>
+            <img src="{{ news.image.url }}" class="img-fluid rounded mb-4" alt="News Image">
+            <p class="lead">{{ news.body }}</p>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Related News</h5>
+                    {% for related_news in related_news_list %}
+                        <p class="card-text"><a href="{% url 'news:news_detail_page' related_news.pk %}">{{ related_news.title }}</a></p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
